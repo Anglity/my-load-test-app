@@ -1,0 +1,25 @@
+{
+    "name": "my-load-test-app",
+    "version": "1.0.0",
+    "description": "Aplicación avanzada en NestJS para simular carga con múltiples endpoints",
+    "main": "dist/main.js",
+    "scripts": {
+      "start": "nest start",
+      "start:dev": "nest start --watch",
+      "build": "nest build"
+    },
+    "dependencies": {
+    "@nestjs/common": "^11.0.0",
+    "@nestjs/core": "^11.0.0",
+    "@nestjs/platform-express": "^11.0.0",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^7.0.0"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^11.0.0",
+    "@nestjs/schematics": "^11.0.0",
+    "@nestjs/testing": "^11.0.0",
+    "typescript": "^4.3.5"
+  }
+  }
+  
