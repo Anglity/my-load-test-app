@@ -140,15 +140,3 @@ kubectl get pods -n my-load-test-app
    ```bash
    kubectl scale deployment my-load-test-app --replicas=5 -n my-load-test-app
    ```
-
----
-
-# 🚀 Cómo Subirlo a GitHub
-```bash
-git add .
-git commit -m "📄 Añadir documentación completa"
-git push origin main
-```
-
-🔥 **¡Con esta documentación tu proyecto es 100% PRO!** 🚀💪 Subelo a GitHub y dime el link.
-
