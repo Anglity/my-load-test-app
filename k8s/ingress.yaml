@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-load-test-ingress
+  namespace: my-load-test-app
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: myapp.example.com  # Reemplaza con tu dominio o IP pública
+      http:
+        paths:
+          - path: /api/load-test
+            pathType: Prefix
+            backend:
+              service:
+                name: my-load-test-service
+                port:
+                  number: 80

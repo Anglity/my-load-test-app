@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-load-test-app
+  namespace: my-load-test-app
+  labels:
+    app: my-load-test-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: my-load-test-app
+  template:
+    metadata:
+      labels:
+        app: my-load-test-app
+    spec:
+      containers:
+        - name: my-load-test-app
+          image: angelalvarez0210/my-load-test-app:latest
+          ports:
+            - containerPort: 3000
+          resources:
+            limits:
+              cpu: "300m"
+              memory: "256Mi"
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+          env:
+            - name: NODE_ENV
+              value: "production"
+
+          # Verifica que la aplicación esté en ejecución
+          livenessProbe:
+            httpGet:
+              path: /api/load-test
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            failureThreshold: 3
+
+          # Verifica que la aplicación está lista para recibir tráfico
+          readinessProbe:
+            httpGet:
+              path: /api/load-test
+              port: 3000
+            initialDelaySeconds: 3
+            periodSeconds: 5
+            failureThreshold: 2
+
+          # Manejo de logs y mensajes de terminación
+          terminationMessagePath: "/dev/termination-log"
+          terminationMessagePolicy: File
+
+      # Asegurar que los pods no se ejecuten en el mismo nodo si hay más de uno
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - my-load-test-app
+              topologyKey: "kubernetes.io/hostname"

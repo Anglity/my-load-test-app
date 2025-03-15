@@ -1,0 +1,10 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: my-load-test-pdb
+  namespace: my-load-test-app
+spec:
+  minAvailable: 2  # Siempre debe haber al menos 2 pods corriendo
+  selector:
+    matchLabels:
+      app: my-load-test-app
